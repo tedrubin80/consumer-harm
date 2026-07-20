@@ -2,7 +2,7 @@
 
 **Evolution or the void?** A story-driven dashboard over the [CFPB Consumer Complaint Database](https://www.consumerfinance.gov/data-research/consumer-complaints/), focused on credit cards: where complaints go, fixed calendar study windows, and issuer patterns.
 
-**Live demo:** [socialregistercorpus.online](https://socialregistercorpus.online) (temporary host)
+**Live demo:** [consumer-harm.vercel.app/app](https://consumer-harm.vercel.app/app) (Vercel → Railway) · [Railway direct](https://consumer-harm-production.up.railway.app)
 
 **Repository:** https://github.com/tedrubin80/consumer-harm
 
