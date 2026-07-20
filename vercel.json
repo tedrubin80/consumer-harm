@@ -1,0 +1,25 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": "web",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/app",
+      "destination": "https://consumer-harm-production.up.railway.app/"
+    },
+    {
+      "source": "/app/:path*",
+      "destination": "https://consumer-harm-production.up.railway.app/:path*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Project", "value": "consumer-harm" }
+      ]
+    }
+  ]
+}

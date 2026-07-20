@@ -453,11 +453,13 @@ export CFPB_STUDY_START=2011-01-01
 export CFPB_STUDY_END=2024-12-31
 export CFPB_EARLY_END=2017-12-31
 export CFPB_RECENT_START=2018-01-01
-python3 ~/datascience/projects/build_cfpb_summary.py
-bash ~/datascience/start-consumer-harm-dashboard.sh
+python3 scripts/build_cfpb_summary.py
+docker compose up -d dashboard
 ```
         """
     )
+    repo = os.environ.get("GITHUB_REPO", "https://github.com/tedrubin80/consumer-harm")
+    st.markdown(f"**Source code:** [{repo}]({repo})")
 
 
 def main() -> None:
@@ -470,6 +472,8 @@ def main() -> None:
             v = credit_card_void_snapshot()
             st.markdown(f"**{v.get('total', 0):,}** credit card complaints")
             st.caption(f"{v.get('void_pct', 0)}% into the void")
+        repo = os.environ.get("GITHUB_REPO", "https://github.com/tedrubin80/consumer-harm")
+        st.markdown(f"[GitHub]({repo})")
 
     routes = {
         "Prologue": render_prologue,

@@ -9,9 +9,8 @@ COPY dashboard ./dashboard
 ENV OPPORTUNITY_HARM_DATA=/data
 ENV HOME=/app
 ENV PYTHONPATH=/app
+ENV PORT=8502
 
 EXPOSE 8502
 
-CMD ["streamlit", "run", "dashboard/app.py", \
-     "--server.port=8502", "--server.address=0.0.0.0", \
-     "--server.headless=true", "--browser.gatherUsageStats=false"]
+CMD ["sh", "-c", "exec streamlit run dashboard/app.py --server.port ${PORT} --server.address 0.0.0.0 --server.headless true --browser.gatherUsageStats false"]

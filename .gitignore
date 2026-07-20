@@ -8,6 +8,7 @@ logs/
 *.db-journal
 *.csv
 *.json
+!vercel.json
 *.zip
 
 # Env

@@ -1,0 +1,18 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "docker/Dockerfile"
+
+[deploy]
+healthcheckPath = "/_stcore/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+numReplicas = 1
+
+# Railway service setup:
+#   Root Directory: . (repo root)
+#   Attach a volume mounted at /data with:
+#     /data/index/cfpb_summary.db
+#     (optional) /data/cfpb/extracted/complaints.csv for rebuilds
+#
+# Variables — see railway.env.example
+# Do NOT set PORT (Railway injects it).

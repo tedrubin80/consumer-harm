@@ -58,6 +58,8 @@ streamlit run dashboard/app.py --server.port 8502
 
 ## Deploy elsewhere
 
+- **Railway (Streamlit app):** connect repo, root directory `.`, uses `railway.toml` + `docker/Dockerfile`. Mount volume at `/data` with `index/cfpb_summary.db`. See `railway.env.example`.
+- **Vercel (landing page):** import repo, root `web` via `vercel.json`; `/app` rewrites to your Railway URL (update `vercel.json` after deploy).
 - **GitHub Actions:** builds container image on push (see `.github/workflows/docker.yml`).
 - **GitLab CI:** see `.gitlab-ci.yml` for the same pattern.
 - Data is **not** in git — ship a volume, object storage, or run the `refresh` profile once on deploy.
