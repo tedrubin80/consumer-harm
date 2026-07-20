@@ -46,8 +46,10 @@ CUSTOM_CSS = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,500;0,600;1,400&display=swap');
 
-html, body, [class*="css"] { font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #0f172a; }
-.stApp { background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); }
+html, body, [class*="css"] { font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+.stApp { background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); color: #0f172a; }
+.main .block-container { color: #0f172a; }
+.main .stMarkdown, .main .stMarkdown p, .main .stMarkdown li { color: #0f172a !important; }
 .block-container { padding-top: 2rem; max-width: 1100px; }
 
 h1, h2, h3, .story-chapter { font-family: 'IBM Plex Serif', Georgia, serif !important; }
@@ -95,7 +97,9 @@ h1, h2, h3, .story-chapter { font-family: 'IBM Plex Serif', Georgia, serif !impo
 .metric-card .label { font-size: 0.8rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.3rem; }
 
 div[data-testid="stSidebar"] { background: #0f172a; }
-div[data-testid="stSidebar"] * { color: #f8fafc !important; }
+div[data-testid="stSidebar"] .stMarkdown p,
+div[data-testid="stSidebar"] label,
+div[data-testid="stSidebar"] span { color: #f8fafc !important; }
 </style>
 """
 

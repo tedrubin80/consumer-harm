@@ -49,6 +49,18 @@ def db_available() -> bool:
     return DB_PATH.is_file()
 
 
+def has_summary_data() -> bool:
+    if not db_available():
+        return False
+    try:
+        conn = _conn()
+        n = conn.execute("SELECT COUNT(*) FROM product_stats").fetchone()[0]
+        conn.close()
+        return n > 0
+    except Exception:
+        return False
+
+
 def _conn() -> sqlite3.Connection:
     return sqlite3.connect(DB_PATH)
 

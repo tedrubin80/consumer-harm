@@ -5,6 +5,7 @@ RUN pip install --no-cache-dir streamlit pandas plotly
 WORKDIR /app
 COPY harm_themes.py period_config.py paths.py period.env.example ./
 COPY dashboard ./dashboard
+COPY .streamlit ./.streamlit
 
 ENV OPPORTUNITY_HARM_DATA=/data
 ENV HOME=/app

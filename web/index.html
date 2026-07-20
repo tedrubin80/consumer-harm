@@ -6,66 +6,143 @@
     <title>Consumer Harm — Evolution or the Void?</title>
     <meta
       name="description"
-      content="CFPB credit card complaints: relief, the void, and fixed study windows."
+      content="CFPB credit card complaints: relief, the void, and fixed study windows 2011–2024."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
     />
     <style>
       :root {
-        color-scheme: light dark;
-        --bg: #0f172a;
-        --fg: #f8fafc;
+        --ink: #0f172a;
+        --cream: #f8fafc;
+        --paper: #f1f5f9;
         --accent: #dc2626;
-        --muted: #94a3b8;
+        --muted: #64748b;
+      }
+      * {
+        box-sizing: border-box;
       }
       body {
-        font-family: system-ui, sans-serif;
-        background: var(--bg);
-        color: var(--fg);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
         margin: 0;
         min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 2rem;
+        background: linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
+        color: var(--ink);
+      }
+      .hero {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: var(--cream);
+        padding: 3.5rem 1.5rem 4rem;
+        border-bottom: 6px solid var(--accent);
+      }
+      .hero-inner {
+        max-width: 52rem;
+        margin: 0 auto;
+      }
+      .hero h1 {
+        font-family: "IBM Plex Serif", Georgia, serif;
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        margin: 0 0 1rem;
+        font-weight: 600;
+      }
+      .hero p {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: #cbd5e1;
+        max-width: 40rem;
+        margin: 0;
       }
       main {
-        max-width: 40rem;
+        max-width: 52rem;
+        margin: -2rem auto 3rem;
+        padding: 0 1.5rem;
       }
-      h1 {
-        font-size: 1.75rem;
-        margin-bottom: 0.5rem;
+      .card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.75rem;
+        box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
       }
-      p {
-        line-height: 1.6;
+      .card h2 {
+        font-family: "IBM Plex Serif", Georgia, serif;
+        font-size: 1.35rem;
+        margin-top: 0;
+      }
+      .card p {
         color: var(--muted);
+        line-height: 1.65;
+      }
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1.25rem 0;
+      }
+      .pill {
+        background: #fef2f2;
+        color: #991b1b;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+      }
+      .actions {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
       }
       a.btn {
         display: inline-block;
-        margin-top: 1.25rem;
-        margin-right: 0.75rem;
-        padding: 0.75rem 1.25rem;
+        padding: 0.85rem 1.35rem;
         background: var(--accent);
-        color: white;
+        color: #fff;
         text-decoration: none;
-        border-radius: 0.5rem;
+        border-radius: 6px;
         font-weight: 600;
       }
+      a.btn:hover {
+        background: #b91c1c;
+      }
       a.link {
-        color: #38bdf8;
+        color: #2563eb;
+        font-weight: 500;
       }
     </style>
   </head>
   <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <h1>Evolution or the Void?</h1>
+        <p>
+          When a credit card complaint hits the CFPB, does anything change — or does it
+          close with an explanation and vanish? Explore relief vs. the void across fixed
+          study years 2011–2024.
+        </p>
+      </div>
+    </header>
     <main>
-      <h1>Consumer Harm</h1>
-      <p>
-        Story dashboard over the CFPB complaint database — credit cards, fixed study
-        periods (2011–2024), and whether outcomes evolve or disappear into the void.
-      </p>
-      <p>
-        The interactive app runs on
-        <strong>Railway</strong> (Streamlit). This Vercel site is the landing page.
-      </p>
-      <a class="btn" href="https://consumer-harm-production.up.railway.app/">Open dashboard</a>
-      <a class="link" href="https://github.com/tedrubin80/consumer-harm">GitHub</a>
+      <div class="card">
+        <h2>Interactive story dashboard</h2>
+        <p>
+          Walk chapters on issuers, complaint volume, APR &amp; denial themes, and whether
+          outcomes shift between 2011–2017 and 2018–2024 — calendar windows, not rolling
+          averages.
+        </p>
+        <div class="pill-row">
+          <span class="pill">CFPB complaints</span>
+          <span class="pill">Credit cards</span>
+          <span class="pill">Fixed 2011–2024</span>
+        </div>
+        <div class="actions">
+          <a class="btn" href="https://consumer-harm-production.up.railway.app/">Enter the dashboard</a>
+          <a class="link" href="https://github.com/tedrubin80/consumer-harm">Source on GitHub</a>
+        </div>
+      </div>
     </main>
   </body>
 </html>

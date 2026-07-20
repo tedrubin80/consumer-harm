@@ -30,6 +30,7 @@ from data import (
     credit_card_void_snapshot,
     db_available,
     granular_focus_snapshot,
+    has_summary_data,
     load_banking_comparison,
     load_credit_card_channels,
     load_credit_card_companies,
@@ -80,10 +81,43 @@ def caveat(text: str) -> None:
 
 
 def require_data() -> bool:
-    if db_available():
+    if has_summary_data():
         return True
-    st.warning("Building summary… Run `python3 ~/datascience/projects/build_cfpb_summary.py`")
+    if db_available():
+        st.error(
+            "Summary database is present but empty. On Railway, mount a volume at `/data` with "
+            "`index/cfpb_summary.db`, or run the refresh job from the repo README."
+        )
+    else:
+        st.warning(
+            "No summary database yet. Build it with `python3 scripts/build_cfpb_summary.py` "
+            "(see GitHub: tedrubin80/consumer-harm)."
+        )
     return False
+
+
+def render_welcome_rail() -> None:
+    """Engaging intro strip — always visible on Railway/Vercel landing."""
+    st.markdown(
+        """
+        <div class="story-hero">
+          <h1>Evolution or the Void?</h1>
+          <p>Credit card complaints filed with the CFPB either end in relief — or close with
+          an explanation and nothing else. This dashboard maps that split across issuers,
+          issues, and fixed calendar windows (not rolling trends).</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    pl = period_labels() if db_available() else {"study": "2011–2024", "early": "2011–2017", "recent": "2018–2024"}
+    c1, c2, c3 = st.columns(3)
+    c1.info(f"**Study period:** {pl['study']}")
+    c2.info(f"**Early window:** {pl['early']}")
+    c3.info(f"**Recent window:** {pl['recent']}")
+    st.markdown(
+        "Use the **sidebar** to walk the story — Prologue → credit card arc → the void → "
+        "whether outcomes change → APR & denial themes → issuer patterns."
+    )
 
 
 def period_banner() -> None:
@@ -99,19 +133,12 @@ def period_banner() -> None:
 
 
 def render_prologue() -> None:
-    hero(
-        "Evolution or the Void?",
-        "When a consumer files a credit card complaint with the CFPB, what happens next? "
-        "Does the industry absorb the feedback and change — or does the case close with "
-        "an explanation and vanish?",
+    chapter(
+        "Prologue — The question",
+        "In banking, the question is not a watch list — it is whether patterns of harm "
+        "evolve or complaints disappear into a bureaucratic void without meaningful remediation.",
     )
     period_banner()
-    chapter(
-        "The underlying story",
-        "You’ve seen harm in storage industries. In banking, the question isn’t a literal "
-        "watch list — it’s whether **patterns of harm evolve** or **complaints disappear "
-        "into a bureaucratic void** without meaningful remediation.",
-    )
     if require_data():
         h = story_headline()
         early_l, recent_l = h.get("early", "early"), h.get("recent", "recent")
@@ -486,6 +513,8 @@ def main() -> None:
     }
     for prefix, fn in routes.items():
         if pick.startswith(prefix):
+            if pick.startswith("Prologue"):
+                render_welcome_rail()
             fn()
             break
 
