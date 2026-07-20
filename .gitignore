@@ -1,0 +1,27 @@
+# Large CFPB exports and generated indexes (download + build locally or in CI)
+data/
+cfpb/raw/
+cfpb/extracted/
+index/
+logs/
+*.db
+*.db-journal
+*.csv
+*.json
+*.zip
+
+# Env
+.env
+.env.*
+!.env.example
+!period.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

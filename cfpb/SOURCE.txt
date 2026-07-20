@@ -1,0 +1,13 @@
+CFPB Consumer Complaint Database — bulk export
+Downloaded: 2026-06-22T02:35:10.928674+00:00
+
+Project: opportunity-harm
+Landing page: https://www.consumerfinance.gov/data-research/consumer-complaints/
+API docs: https://cfpb.github.io/ccdb5-api/
+Field reference: https://cfpb.github.io/api/ccdb/fields.html
+
+Files:
+  - json: https://files.consumerfinance.gov/ccdb/complaints.json.zip
+      zip: /home/grimdolf/opportunity_harm/cfpb/raw/complaints.json.zip (1.4 GB)
+      extracted: /home/grimdolf/opportunity_harm/cfpb/extracted/complaints.json
+      remote last-modified: Sun, 21 Jun 2026 09:41:12 GMT

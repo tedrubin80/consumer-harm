@@ -1,0 +1,22 @@
+stages:
+  - build
+
+variables:
+  IMAGE: $CI_REGISTRY_IMAGE/dashboard
+
+build-dashboard:
+  stage: build
+  image: docker:27
+  services:
+    - docker:27-dind
+  script:
+    - docker build -f docker/Dockerfile -t "$IMAGE:$CI_COMMIT_SHA" .
+    - docker tag "$IMAGE:$CI_COMMIT_SHA" "$IMAGE:latest"
+    - |
+      if [ -n "$CI_REGISTRY" ]; then
+        docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+        docker push "$IMAGE:$CI_COMMIT_SHA"
+        docker push "$IMAGE:latest"
+      fi
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

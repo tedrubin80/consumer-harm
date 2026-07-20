@@ -1,0 +1,31 @@
+# Portable deploy (GitHub / GitLab / Railway / any host).
+# Mount ./data with cfpb/ + index/ — see README.
+
+services:
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: consumer-harm-dashboard:latest
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8502}:8502"
+    env_file:
+      - period.env.example
+    environment:
+      OPPORTUNITY_HARM_DATA: /data
+      GITHUB_REPO: ${GITHUB_REPO:-https://github.com/tedrubin80/consumer-harm}
+    volumes:
+      - ${OPPORTUNITY_HARM_DATA:-./data}:/data:ro
+
+  refresh:
+    profiles: ["refresh"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.refresh
+    volumes:
+      - ${OPPORTUNITY_HARM_DATA:-./data}:/data
+    env_file:
+      - period.env.example
+    environment:
+      OPPORTUNITY_HARM_DATA: /data

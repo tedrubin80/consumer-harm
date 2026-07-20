@@ -1,0 +1,15 @@
+FROM python:3.12-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir pandas
+
+WORKDIR /app
+COPY harm_themes.py period_config.py paths.py period.env.example ./
+COPY scripts ./scripts
+
+ENV OPPORTUNITY_HARM_DATA=/data
+ENV PYTHONPATH=/app
+
+CMD ["bash", "-c", "python3 scripts/download_cfpb_complaints.py --format csv && python3 scripts/build_cfpb_summary.py"]

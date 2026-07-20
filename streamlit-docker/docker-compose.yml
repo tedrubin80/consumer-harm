@@ -1,0 +1,26 @@
+# Consumer Harm dashboard — npm-net so NPM can proxy socialregistercorpus.online.
+services:
+  dashboard:
+    build: .
+    container_name: consumer-harm-dashboard
+    restart: unless-stopped
+    user: "1000:1000"
+    environment:
+      HOME: /home/grimdolf
+    volumes:
+      - /home/grimdolf/opportunity_harm:/home/grimdolf/opportunity_harm:rw
+    working_dir: /home/grimdolf/opportunity_harm/dashboard
+    command:
+      - streamlit
+      - run
+      - app.py
+      - --server.port=8502
+      - --server.address=0.0.0.0
+      - --server.headless=true
+      - --browser.gatherUsageStats=false
+    networks:
+      - npm-net
+
+networks:
+  npm-net:
+    external: true
