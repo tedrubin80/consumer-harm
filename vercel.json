@@ -4,14 +4,16 @@
   "installCommand": null,
   "outputDirectory": "web",
   "framework": null,
-  "rewrites": [
+  "redirects": [
     {
       "source": "/app",
-      "destination": "https://consumer-harm-production.up.railway.app/"
+      "destination": "https://consumer-harm-production.up.railway.app/",
+      "permanent": false
     },
     {
       "source": "/app/:path*",
-      "destination": "https://consumer-harm-production.up.railway.app/:path*"
+      "destination": "https://consumer-harm-production.up.railway.app/:path*",
+      "permanent": false
     }
   ],
   "headers": [
