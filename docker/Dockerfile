@@ -6,6 +6,9 @@ WORKDIR /app
 COPY harm_themes.py period_config.py paths.py period.env.example ./
 COPY dashboard ./dashboard
 COPY .streamlit ./.streamlit
+COPY deploy/cfpb_summary.db /app/deploy/cfpb_summary.db
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 ENV OPPORTUNITY_HARM_DATA=/data
 ENV HOME=/app
@@ -14,4 +17,4 @@ ENV PORT=8502
 
 EXPOSE 8502
 
-CMD ["sh", "-c", "exec streamlit run dashboard/app.py --server.port ${PORT} --server.address 0.0.0.0 --server.headless true --browser.gatherUsageStats false"]
+ENTRYPOINT ["/entrypoint.sh"]

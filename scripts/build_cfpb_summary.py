@@ -222,7 +222,9 @@ def is_credit_card(product: str) -> bool:
 def filter_study_period(df: pd.DataFrame, period: StudyPeriod) -> pd.DataFrame:
     if df.empty:
         return df
-    received = pd.to_datetime(df["Date received"], errors="coerce")
+    received = pd.to_datetime(df["Date received"], errors="coerce", utc=True)
+    if getattr(received.dt, "tz", None) is not None:
+        received = received.dt.tz_localize(None)
     start = pd.Timestamp(period.start)
     end = pd.Timestamp(period.end) + pd.Timedelta(days=1) - pd.Timedelta(nanoseconds=1)
     mask = received.notna() & (received >= start) & (received <= end)

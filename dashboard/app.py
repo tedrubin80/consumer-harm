@@ -493,12 +493,16 @@ def main() -> None:
     with st.sidebar:
         st.markdown("### Consumer Harm")
         pick = st.radio("Story", CHAPTERS, label_visibility="collapsed")
-        if db_available():
+        if has_summary_data():
             pl = period_labels()
             st.caption(f"Study: {pl['study']}")
             v = credit_card_void_snapshot()
             st.markdown(f"**{v.get('total', 0):,}** credit card complaints")
             st.caption(f"{v.get('void_pct', 0)}% into the void")
+        elif db_available():
+            st.caption("DB mounted — rebuild summary")
+        else:
+            st.caption("Awaiting /data/index/cfpb_summary.db")
         repo = os.environ.get("GITHUB_REPO", "https://github.com/tedrubin80/consumer-harm")
         st.markdown(f"[GitHub]({repo})")
 

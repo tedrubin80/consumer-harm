@@ -6,6 +6,7 @@ index/
 logs/
 *.db
 *.db-journal
+!deploy/cfpb_summary.db
 *.csv
 *.json
 !vercel.json
