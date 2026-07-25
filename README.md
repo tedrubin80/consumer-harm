@@ -58,11 +58,16 @@ streamlit run dashboard/app.py --server.port 8502
 
 ## Deploy elsewhere
 
-- **Railway (Streamlit app):** connect repo, root directory `.`, uses `railway.toml` + `docker/Dockerfile`. Mount volume at `/data` with `index/cfpb_summary.db`. See `railway.env.example`.
-- **Vercel (landing page):** import repo, root `web` via `vercel.json`; `/app` rewrites to your Railway URL (update `vercel.json` after deploy).
-- **GitHub Actions:** builds container image on push (see `.github/workflows/docker.yml`).
-- **GitLab CI:** see `.gitlab-ci.yml` for the same pattern.
-- Data is **not** in git — ship a volume, object storage, or run the `refresh` profile once on deploy.
+| Surface | Role | Data |
+|---------|------|------|
+| **Railway** | Streamlit dashboard | `deploy/cfpb_summary.db` baked into Docker image; startup entrypoint seeds `/data/index/` if the mounted volume DB is empty |
+| **Vercel** | Static landing page (`web/`) | No data — `/app` redirects to Railway |
+| **Git** | Source + summary DB | `deploy/cfpb_summary.db` (~4 MB, 7.2M-complaint aggregates). Raw 8 GB CSV is **not** in git — download via `scripts/download_cfpb_complaints.py` or restore from backup |
+
+- **Railway:** connect repo, root `.`, uses `railway.toml` + `docker/Dockerfile`. Optional volume at `/data` for rebuilds.
+- **Vercel:** import repo, `vercel.json` at root; `/app` redirects to Railway.
+- **GitHub Actions:** builds container on push (`.github/workflows/docker.yml`).
+- **Backup:** Hetzner Storage Box `consumer-harm-corpus/` (CSV + summary DB).
 
 ## Legacy server layout
 
